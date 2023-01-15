@@ -1,0 +1,18 @@
+SELECT DISTINCT First_Name
+FROM Users
+WHERE LENGTH(First_Name) = (SELECT MAX(LENGTH(U1.First_Name)) FROM USERS U1)
+ORDER BY First_Name ASC;
+
+
+SELECT DISTINCT First_Name
+FROM Users
+WHERE LENGTH(First_Name) = (SELECT MIN(LENGTH(U1.First_Name)) FROM USERS U1)
+ORDER BY First_Name ASC;
+
+
+SELECT First_Name, COUNT(User_ID)
+FROM Users
+GROUP BY First_Name
+HAVING COUNT(User_ID) = (SELECT MAX(COUNT(U1.User_ID)) FROM USERS U1 
+						 GROUP BY U1.First_Name)
+ORDER BY First_Name ASC;
